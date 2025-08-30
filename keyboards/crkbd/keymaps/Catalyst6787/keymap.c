@@ -16,10 +16,16 @@
 
 const uint16_t PROGMEM jkl_esc[] = {RSFTJ,RCTLK,LALTL, COMBO_END};
 const uint16_t PROGMEM sdf_enter[] = {LALTS, LCTLD, LSFTF, COMBO_END};
+const uint16_t PROGMEM jk_min[] = {RSFTJ, RCTLK, COMBO_END};
+const uint16_t PROGMEM df_unds[] = {LCTLD, LSFTF, COMBO_END};
+const uint16_t PROGMEM io_cw[] = {KC_I, KC_O, COMBO_END};
 
 combo_t key_combos[] = {
     COMBO(jkl_esc, KC_ESC),
     COMBO(sdf_enter, KC_ENTER), // keycodes with modifiers are possible too!
+    COMBO(jk_min, KC_MINS),
+    COMBO(df_unds, KC_UNDS),
+    COMBO(io_cw, CW_TOGG)
 };
 
 
@@ -93,25 +99,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                 _______, MO(4),KC_SPACE,              KC_BACKSPACE, KC_LGUI, KC_ENTER //`--------------------------'  `--------------------------'
   ),
 };
-
-bool caps_word_press_user(uint16_t keycode) {
-    switch (keycode) {
-        // Keycodes that continue Caps Word, with shift applied.
-        case KC_A ... KC_Z:
-            return true;
-
-        // Keycodes that continue Caps Word, without shifting.
-        case KC_1 ... KC_0:
-        case KC_BSPC:
-        case KC_DEL:
-        case KC_UNDS:
-        case KC_MINS:
-            return true;
-
-        default:
-            return false;  // Deactivate Caps Word.
-    }
-}
 
 #ifdef ENCODER_MAP_ENABLE
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
